@@ -1,0 +1,178 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block home_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font+Awesome+5+Free:wght@900&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font+Awesome+5+Brands:wght@400&display=swap" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <div class="main-container">
+      <span class="farm-to-consumer">FarmConnect<br />MarketPlace</span
+      ><span class="discover-fresh-produce"
+        >Discover fresh and locally grown produce at our farmers’ market.<br />Connect
+        with farmers and purchase their products easily through<br />our
+        platform.</span
+      >
+      <div class="flex-row-dc">
+        <a href="{% url 'store' %}">
+          <button class="link">
+            <span class="fruits">Shop Fresh</span>
+          </button>
+        </a>
+        <a href="{% url 'farmer_signup' %}">
+          <button class="link-1">
+            <span class="vegetables">Sell Direct</span>
+          </button>
+        </a>
+        
+      </div>
+      <div class="div-elementor-element">
+        <div class="recycled-shoe-store-home-about-image"></div>
+        <div class="flex-column">
+          <span class="about-us">ABOUT US</span
+          ><span class="connecting-freshest-produce"
+            >Connecting You to the<br />Freshest Produce</span
+          ><span class="fc-farmers-market-platform"
+            >FCM is a farmers’ market platform that brings you fresh, locally grown
+            produce. We bring you the best that local farms have to offer, making
+            it easy for you to purchase what you need and delivered 
+            straight from the field to your table.<br /></span
+          >
+          <div class="link-2"><span class="read-more">READ MORE</span></div>
+        </div>
+      </div>
+      <div class="div-elementor-element-3">
+        <div class="div-elementor-element-4">
+          <span class="span-why-choose-fc">Why Choose FCM?</span
+          ><span class="span-why-choose-f2c"
+            >At FCM, we believe in the importance of locally grown produce. Our
+            platform puts you in touch with farmers, ensuring that you receive
+            the freshest products. By choosing FCM, you’re supporting local
+            agriculture, reducing your carbon footprint, and promoting a
+            healthy lifestyle.</span
+          >
+        </div>
+        <div class="div-elementor-element-5">
+          <div class="flex-row-fd">
+            <span class="span-01">01.</span
+            ><span class="span-heading">03.</span>
+          </div>
+          <div class="flex-row-a">
+            <span class="span-fresh-produce">Fresh Produce</span
+            ><span class="span-reduced-carbon-footprint"
+              >Reduced Carbon Footprint</span
+            >
+          </div>
+          <div class="flex-row-eeb">
+            <span class="span-our-produce"
+              >Our produce is locally grown and delivered fresh to your
+              doorstep, ensuring that you receive the highest quality
+              products.</span
+            ><span class="span-reducing-carbon-footprint"
+              >By purchasing locally grown produce, you’re reducing the carbon
+              footprint associated with long-distance transport and
+              supporting a more sustainable food system.</span
+            >
+          </div>
+          <div class="span-elementor-divider-separator"></div>
+          <div class="flex-row-de">
+            <span class="span-02">02.</span
+            ><span class="span-heading-6">04.</span>
+          </div>
+          <div class="flex-row-f">
+            <span class="support-local-agriculture"
+              >Support Local Agriculture</span
+            ><span class="healthy-lifestyle">Healthy Lifestyle</span>
+          </div>
+          <div class="flex-row-baf">
+            <span class="choose-f2c-support"
+              >By choosing FCM, you’re supporting local farmers and their
+              families, promoting sustainable agriculture practices, and
+              contributing to your local economy.</span
+            ><span class="grown-without-chemicals"
+              >Our produce is grown without harmful chemicals, ensuring that you
+              and your family receive the<br />healthiest and most nutritious
+              products possible.</span
+            >
+          </div>
+        </div>
+        <div class="elementor-divider-separator"></div>
+      </div>
+      <div class="elementor-element">
+        <div class="img-mask-group"></div>
+        <span class="promoting-sustainable-practices"
+          >At FCM, we’re committed to promoting sustainable agriculture
+          practices. By connecting you with local farmers, we’re reducing
+          the carbon footprint associated with long-distance transport and
+          supporting a more sustainable food system. Our platform also
+          ensures that farmers receive fair compensation for their hard
+          work, promoting a healthy and equitable food system.</span
+        >
+      </div>
+
+      <div class="elementor-element-7"></div>
+
+      <div class="flex-row">
+        <div class="elementor-widget-container">
+          <div class="symbol"></div>
+          <span class="secure-payment">Secure Payment</span>
+        </div>
+        <div class="elementor-widget-container-8">
+          <div class="symbol-9"></div>
+          <span class="express-shipping">Express Shipping</span>
+        </div>
+        <div class="widget-container">
+          <div class="symbol-a"></div>
+          <span class="free-return">Free Return</span>
+        </div>
+      </div>
+      <div class="flex-row-cae">
+        <span class="heading-f2c">FCM</span
+        ><span class="heading-shop">Shop</span
+        ><span class="heading-about">About</span
+        ><span class="heading-need-help">Need Help?</span>
+      </div>
+      <div class="flex-row-e">
+        <span class="stay-up-to-date"
+          >Stay up-to-date with FCM<br />and our farmers. Follow us<br />on
+          social media and be the<br />first to know about new<br />products,
+          promotions, and<br />events.</span
+        >
+        <span class="nav-fv">Fruits & Vegetables</span
+        ><span class="nav-ap">Animal Products</span
+        ><span class="nav-sp">Seeds & Plants</span
+        ><span class="nav-fs">Farming Supplies</span
+        ><span class="nav-dr">Digital Resources</span
+
+        ><span class="nav-home">Home</span
+        ><span class="nav-contact">Contact</span
+        
+        ><span class="nav-shop">Shop</span
+        ><span class="nav-my-account">My account</span
+        ><span class="nav-list-item-cart">Cart</span
+        ><span class="nav-list-item-checkout">Checkout</span>
+      </div>
+      <div class="flex-row-bbb">
+        <div class="link-b"><div class="symbol-c"></div></div>
+        <div class="symbol-d"></div>
+        <div class="symbol-e"></div>
+        <div class="link-f"></div>
+        <div class="symbol-10"></div>
+        <div class="link-11"></div>
+      </div>
+      <div class="before"></div>
+      <div class="div-elementor-element-12"></div>
+    </div>
+  </body>
+</html>
+
+
+{% endblock home_content %}

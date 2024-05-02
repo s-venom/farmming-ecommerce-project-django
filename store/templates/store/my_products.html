@@ -1,0 +1,290 @@
+{% extends 'store/profile.html' %}
+{% load static %}
+
+{% block profile_content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-15">
+            <!-- Add Product Button -->
+            <div class="box-element" id="add-product-button">
+                <h5>Add Product</h5>
+                <button class="btn btn-primary" id="add-product-btn" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <span>+</span> Add Product
+                </button>
+            </div>
+            <br>
+            <!-- Farmer Products with Edit Option -->
+            <div class="box-element" id="farmer-products">
+                <h5>My Products</h5>
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div style="position: relative;">
+                                <img class="card-img-top" src="{{ product.imageURL }}" alt="Product Image">
+                                <!-- Vendor image as a small circle over the top-left corner -->
+                                <img src="{{ product.farmer.imageURL }}" style="position: absolute; top: 5px; left: 5px; border-radius: 50%; width: 50px; height: 50px;" alt="Vendor Image">
+                            </div>
+                            <div class="card-body">
+                                <p class="small mb-1 text-muted">Grown by <a href="#">{{product.farmer.shop_name}}</a></p>
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text"><strong>${{ product.price }}</strong></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <!-- Edit button -->
+                                        <button class="btn btn-sm btn-outline-success" onclick="openEditModal('{{ product.id }}', '{{ product.categories }}', '{{ product.name }}', '{{ product.description }}', '{{ product.price }}', '{{ product.weight_quantity }}', '{{ product.digital}}', '{{ product.stock }}')">Edit</button>
+                                        <!-- Delete button -->
+                                        <button class="btn btn-sm btn-outline-secondary ml-2" onclick="openDeleteModal('{{ product.id }}', '{{ product.categories }}', '{{ product.name }}', '{{ product.description }}', '{{ product.price }}', '{{ product.weight_quantity }}', '{{ product.digital}}', '{{ product.stock }}')">Delete</button>
+                                        
+                                    </div>
+                                    <small class="text-muted">9 mins ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/my_products.js' %}"></script>
+
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Your form for adding a new product goes here -->
+                <!-- Add Product Form {{form.as_p}} <input type="text" name="farmer" , id="farmer", value="{{ request.user.farmer }}">-->
+                <form method="POST" enctype="multipart/form-data" id="addProductForm" action="{% url 'my_products' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="add_product_form">
+
+                    <!-- Product Image -->
+                    <div class="form-group">
+                        <label for="image">Product Image</label>
+                        <input type="file" class="form-control-file" id="image" name="image" required>
+                        {% if form.image.errors %}
+                            <ul class="errorlist">
+                            {% for error in form.image.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Category -->
+                    <div class="form-group">
+                        <label for="categories">Category</label>
+                        <select class="form-control" id="categories" name="categories" required>
+                            <option value="">Select Category</option>
+                            {% for category in categories %}  
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if form.categories.errors %}
+                            <ul class="errorlist">
+                            {% for error in form.categories.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Name -->
+                    <div class="form-group">
+                        <label for="name">Product Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        {% if form.name.errors %}
+                            <ul class="errorlist">
+                            {% for error in form.name.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="form-group">
+                        <label for="description">{{ form.description.label }}</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        {% if form.description.errors %}
+                            <ul class="errorlist">
+                                {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                        {% if form.price.errors %}
+                            <ul class="errorlist">
+                            {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Weight/Quantity -->
+                    <div class="form-group">
+                        <label for="weight_quantity">{{ form.weight_quantity.label }}</label>
+                        <input type="text" class="form-control" id="weight_quantity" name="weight_quantity" required>
+                        {% if form.weight_quantity.errors %}
+                            <ul class="errorlist">
+                            {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Digital -->
+                    <div class="form-group">
+                        <label for="digital">{{ form.digital.label }}</label>
+                        {{ form.digital.as_widget }}
+                        {% if form.digital.errors %}
+                            <ul class="errorlist">
+                                {% for error in form.digital.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Stock -->
+                    <div class="form-group">
+                        <label for="stock">{{ form.stock.label }}</label>
+                        {{ form.stock.as_widget }}
+                        {% if form.stock.errors %}
+                            <ul class="errorlist">
+                                {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" id="editProductId" name="edit_product_id">
+                    <!-- Add form fields for editing product details here -->
+
+                    <div class="form-group">
+                        <label for="editImage">Product Image</label>
+                        <input type="file" class="form-control-file" id="editImage" name="image">
+                    </div>
+                    <div class="form-group">
+                        <label for="editCategories">Category</label>
+                        <select class="form-control" id="editCategories" name="categories">
+                            <option value="">Select Category</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductName">Product Name</label>
+                        <input type="text" class="form-control" id="editProductName" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editDescription">Description</label>
+                        <textarea class="form-control" id="editDescription" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrice">Price</label>
+                        <input type="number" step="0.01" class="form-control" id="editPrice" name="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="editWeightQuantity">Weight/Quantity</label>
+                        <input type="text" class="form-control" id="editWeightQuantity" name="weight_quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="editDigital">Digital</label>
+                        <input type="checkbox" class="form-control" id="editDigital" name="digital">
+                    </div>
+                    <div class="form-group">
+                        <label for="editStock">Stock</label>
+                        <input type="number" class="form-control" id="editStock" name="stock">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Product Modal -->
+<div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProductModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="deleteProductForm" method="POST" action="{% url 'my_products' %}">
+                {% csrf_token %}
+                <input type="hidden" name="delete_product_id" id="deleteProductId">
+
+                <div class="modal-body">
+                    <p>Are you sure you want to delete the following product?</p>
+                    <p><strong>Product Name:</strong> <span id="deleteProductName"></span></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock profile_content %}

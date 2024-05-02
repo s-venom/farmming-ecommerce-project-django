@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <!-- Sidebar with categories -->
+        <div class="col-lg-3">
+            <div class="list-group">
+                <a href="/profile/about_you/" class="list-group-item list-group-item-action btn btn-outline-success">About You</a>
+                <a href="/profile/my_orders/" class="list-group-item list-group-item-action btn btn-outline-success">My Orders</a>
+                    {% if not user_profile.is_customer %}
+                <a href="/profile/my_products/" class="list-group-item list-group-item-action btn btn-outline-success">My Products</a>
+                <a href="/profile/my_sales/" class="list-group-item list-group-item-action btn btn-outline-success">My Sales</a>
+                    {% endif %}
+                <a href="#" class="list-group-item list-group-item-action btn btn-outline-success">Settings(NA)</a>
+                <a href="#" class="list-group-item list-group-item-action btn btn-outline-success">Support(NA)</a>
+                <!-- Add more categories here as needed -->
+            </div>
+        </div>
+        <!-- Main content area -->
+        <div id='products' class="col-lg-9">
+            <!-- Content for each category will be loaded dynamically here -->
+            {% block profile_content %}
+
+            {% endblock profile_content %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

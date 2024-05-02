@@ -1,0 +1,149 @@
+<!-- main.html -->
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>FarmConect MarketPlace</title>
+    
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet">
+
+    <!-- Responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:;base64,=">
+
+    <!-- JavaScript for CSRF Token -->
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        // Function to get CSRF Token
+        function getToken(name) {
+            let cookieValue = null;
+
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = cookies[i].trim();
+
+                    // Check if cookie starts with the given name
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let csrftoken = getToken('csrftoken');
+    </script>
+</head>
+<body 
+style="font-family: Poppins; 
+background-image: linear-gradient(to right, hsla(120, 40%, 80%, 0.2), hsla(120, 40%, 80%, 0.2) 50%, transparent 50%, transparent 100%);
+background-size: 80px 80px;
+">
+    <!-- Navbar <a class="navbar-brand" href="{% url 'home' %}">FarmConnect</a> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'home' %}" id="FCM">
+            <img src="{% static 'images/fcm-logo.jpg' %}" alt="FCM"  
+            style="width: 65px;
+            height: 35px;">
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link ml-2 home-link" href="{% url 'home' %}" style="color: #FFF;">
+                        <span class="home-link-text" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107';" onmouseout="this.style.textDecoration='none'; this.style.color='#FFF';">Home</span>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link store-link" href="{% url 'store' %}" style="color: #FFF;">
+                        <span class="store-link-text" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107';" onmouseout="this.style.textDecoration='none'; this.style.color='#FFF';">Store</span>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+            
+
+            <div class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <!-- Profile Option -->
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item active">
+                            <a class="nav-link d-flex align-items-center justify-content-center rounded-circle bg-primary text-white" href="{% url 'profile' %}" id="profileDropdown" style="width: 2.5rem; height: 2.5rem;">
+                                {{ request.user.first_name | first }}  
+                            </a>        
+                        </li>
+                        <li class="nav-item active">
+                            <a class="btn btn-outline-warning ml-2" href="/logout/">Logout<span class="sr-only">(current)</span></a>
+                        </li>
+                    {% else %}
+                        <!-- Signup Option -->
+                        <li class="nav-item active">
+                            <a class="btn btn-warning" href="/signup/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                                </svg>
+                                Signup<span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <!-- Login Option -->
+                        <li class="nav-item active">
+                            <a class="btn btn-outline-warning ml-2" href="/login/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                </svg> Login<span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <!-- Cart Icon -->
+                    <a href="{% url 'cart' %}">
+                        <img id="cart-icon" src="{% static 'images/cart.png' %}">
+                    </a>
+                    <p id="cart-total">{{cartItems}}</p>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page Content -->
+    {% block home_content %}
+    
+    {% endblock home_content %}
+    
+    <div class="container" style="padding-top: 4rem;">
+        <br>
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for Cart -->
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+</body>
+
+</html>
