@@ -1,0 +1,1 @@
+# farmming-ecommerce-project-django
