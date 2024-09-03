@@ -36,6 +36,18 @@ Key Features:
  -Inventory Management: Implements features for farmers to maintain product availability, update stock levels, and track order fulfillment.
  
 
+Installation (if applicable):
+
+
+ -Clone the repository.
+ 
+ -Install required dependencies (pip install requirements.txt).
+
+ -Configure backend settings (database connection, email settings, etc.).
+
+ -Run Django development server (python manage.py runserver).
+
+
 Usage:
 
  -Access the website in your web browser (typically http://localhost:8000).
