@@ -1,5 +1,8 @@
 # farmming-ecommerce-project-django
 
+static/images/fcm-logo.jpg
+![FCM Logo](static/images/fcm-logo.jpg)
+
 Project Name: FarmConnect Marketplace
 
 Description:
