@@ -40,7 +40,42 @@ Website images:
 
 1. Home page
 
-![Homepage](static/images/1home page.png)
+![Home page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/1home%20page.png)
+
+
+2. Store page
+
+![store page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/2store%20page.png)
+
+
+3. Cart page
+
+![cart page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/3cart%20page.png)
+
+
+4. Checkout page
+
+![checkout page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/4checkout%20page.png)
+
+
+5. About you page
+
+![about you page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/5about%20you%20page.png)
+
+
+6. My orders page
+
+![my orders page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/6my%20orders%20page.png)
+
+
+7. My products page
+
+![my products page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/7my%20products%20page.png)
+
+
+6. My sales page
+
+![my sales page](https://github.com/s-venom/farmming-ecommerce-project-django/blob/main/static/images/8my%20sales%20page.png)
 
 
 
