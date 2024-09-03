@@ -36,6 +36,14 @@ Key Features:
  -Inventory Management: Implements features for farmers to maintain product availability, update stock levels, and track order fulfillment.
  
 
+Website images:
+
+1. Home page
+
+![Homepage](static/images/1home page.png)
+
+
+
 Installation (if applicable):
 
 
